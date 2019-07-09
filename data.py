@@ -6,7 +6,7 @@ class GravityObject:
     # def __init__(self, Window, x, y, z, frame_size, name):
     def __init__(self, *args, **kwargs):
         self._mass = 5.972 * 1e24
-        self._radius = 6.371 * 1e6
+        # self._radius = 6.371 * 1e6
         self._x = args[0]
         self._y = args[1]
         self._z = args[2]
@@ -26,14 +26,6 @@ class GravityObject:
         self.tmp_x /= 2
         self.tmp_y /= 2
         self.tmp_z /= 2
-
-    # @staticmethod
-    # def update(*pts):
-    #     for i in range(len(pts)):
-    #         x = pts[i].x
-    #         y = pts[i].y
-    #         z = pts[i].z
-    #         # print(z)
 
     @property
     def x(self):

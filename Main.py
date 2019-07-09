@@ -2,10 +2,11 @@ from vpython import scene
 from vpython import vec
 from data import GravityObject
 from node import Node
+import lets_calculate_this
 import random
 
 
-global L
+theta = 1
 L = 2e7
 scene.height = scene.width = 600
 scene.range = L
@@ -25,8 +26,12 @@ def generate_points(amount):
 
 objects = []
 root = Node(None, 1, 0, "root", True, "none", None)
-
-generate_points(100)
+# generate_points(10)
+objects.append(GravityObject(0.001, 0.001, 0.001, L))
+objects.append(GravityObject(0.2, 0.001, 0.001, L))
+objects.append(GravityObject(0.03, 0.001, 0.001, L))
+objects.append(GravityObject(0.01, 0.001, 0.001, L))
 for _object in objects:
-    print("test")
-    root.insert2(_object)
+    root = root.insert2(_object)
+
+root.traverse()
