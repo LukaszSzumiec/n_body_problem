@@ -26,12 +26,14 @@ def generate_points(amount):
 
 objects = []
 root = Node(None, 1, 0, "root", True, "none", None)
-# generate_points(10)
-objects.append(GravityObject(0.001, 0.001, 0.001, L))
-objects.append(GravityObject(0.2, 0.001, 0.001, L))
-objects.append(GravityObject(0.03, 0.001, 0.001, L))
-objects.append(GravityObject(0.01, 0.001, 0.001, L))
-for _object in objects:
-    root = root.insert2(_object)
+generate_points(10000)
+# objects.append(GravityObject(0.001, 0.001, 0.001, L))
+# objects.append(GravityObject(0.200, 0.001, 0.001, L))
+# objects.append(GravityObject(0.030, 0.001, 0.001, L))
+# objects.append(GravityObject(0.1, 0.001, 0.001, L))
+# objects.append(GravityObject(0.5, 0.001, 0.001, L))
 
-root.traverse()
+for _object in objects:
+    root.insert2(_object)
+
+# root.traverse()

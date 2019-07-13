@@ -24,14 +24,13 @@ class Node:
 
     def insert2(self, data):
 
-        if self.frame_size < 0.000000001:
+        if self.frame_size < 0.00000000000001:
             print("ERROR" + self.name)
             sys.exit(0)
 
         global tmp_x
         global tmp_y
         global tmp_z
-
         if data.meh:
             tmp_x = self.get_coords(data.tmp_x)
             tmp_y = self.get_coords(data.tmp_y)
@@ -40,14 +39,13 @@ class Node:
             tmp_x = data.tmp_x
             tmp_y = data.tmp_y
             tmp_z = data.tmp_z
-        data.meh = True
-        self.gravity_score += 1
-
+            data.meh = True
         data.tmp_x = tmp_x
         data.tmp_y = tmp_y
         data.tmp_z = tmp_z
-        if self._n_kid_one is None:
-            print("EH")
+
+        # if self._n_kid_one is None:
+        #     print("kid one is none")
         print("\n\nTMPX: " + str(tmp_x) + "\n\tTMPY: "
               + str(tmp_y) + "\n\t\t\tZ: " + str(tmp_z)
               + "\n\t\t\tframe: " + str(self.frame_size))
@@ -55,71 +53,35 @@ class Node:
 
         if tmp_x >= 0 and tmp_y >= 0 and tmp_z >= 0:  # FIRST
             print("1")
-            self._n_kid_one = self.d(self._n_kid_one, data)
-        # self.n_first(data)
+            self.n_first(data)
 
         elif tmp_x < 0 and tmp_y >= 0 and tmp_z >= 0:  # SECOND
             print("2")
-            self._n_kid_two = self.d(self._n_kid_two, data)
-        # self.n_second(data)
+            self.n_second(data)
 
         elif tmp_x < 0 and tmp_y < 0 and tmp_z >= 0:  # THIRD
             print("3")
-            self._n_kid_three = self.d(self._n_kid_three, data)
-        # data = self.a(data)
-        # self.n_third(data)
+            self.n_third(data)
 
         elif tmp_x >= 0 and tmp_y < 0 and tmp_z >= 0:  # FOURTH
-            # data = self.a(data)
             print("4")
-            self._n_kid_four = self.d(self._n_kid_four, data)
-        # self.n_fourth(data)
+            self.n_fourth(data)
 
         elif tmp_x >= 0 and tmp_y >= 0 and tmp_z < 0:  # FIFTH
             print("5")
-            self._s_kid_one = self.d(self._s_kid_one, data)
-
-        # data = self.a(data)
-        # self.s_first(data)
+            self.s_first(data)
 
         elif tmp_x < 0 and tmp_y >= 0 and tmp_z < 0:  # 6
             print("6")
-            self._s_kid_two = self.d(self._s_kid_two, data)
-        # data = self.a(data)
-        # self.s_second(data)
+            self.s_second(data)
 
         elif tmp_x < 0 and tmp_y < 0 and tmp_z < 0:  # SEVENTH
             print("7")
-            self._s_kid_three = self.d(self._s_kid_three, data)
-        # data = self.a(data)
-        # self.s_third(data)
+            self.s_third(data)
 
         elif tmp_x >= 0 and tmp_y < 0 and tmp_z < 0:  # EIGTH
             print("8")
-            self._s_kid_four = self.d(self._s_kid_four, data)
-            # data = self.a(data)
-            # self.s_fourth(data)
-
-    def d(self, son, data):
-        print("\n\nTMPX: " + str(tmp_x) + "\n\tTMPY: "
-              + str(tmp_y) + "\n\t\t\tZ: " + str(tmp_z)
-              + "\n\t\t\tframe: " + str(self.frame_size))
-        if son is None:
-            print("jeden")
-            return Node(data, self.frame_size/2, self.gravity_score, data.name,
-                        False, self.name, self)
-        elif son and son.is_hub:
-            # son.frame_size /= 2
-            print("dwa")
-            return son.insert2(data)
-        else:
-            print("trzy")
-            tmp = son._data
-            son = Node(tmp, self.frame_size / 2, self._gravity_score - 1, "asdf",
-                       True, self.name, self)
-            son.insert2(tmp)
-            son.insert2(data)
-            return son
+            self.s_fourth(data)
 
     def n_first(self, data):
         print("nFIRSTTTTTTTTTTTTTTT")
@@ -272,74 +234,6 @@ class Node:
             return tmpx2
         else:
             return tmpx
-
-            # def print2DUtil(self, space):
-            #
-            #     # if self:
-            #     #     arrow = "|\n" \
-            #     #         "L>>" + str(self.name)
-            #     # # Base case
-            #     if self is None:
-            #         return
-            #     # gap = ''
-            #     # for i in range (0, Node.counter):
-            #     #     gap = gap.join("\t")
-            #     # print(gap.join(self.name))
-            #       str(tmpx_plus) + "\n\t\t\tTMPYPLUS: " + str(tmpy_plus) + "\n\t\t\t\tFRAME: " + str(self.frame_size))
-            #     #
-            # print("TMPXMIN: " + str(tmpx_minus) + "\n\tTMPYMINUS: " + str(tmpy_minus) + "\n\t\tTMPXPLUS: " +
-            #     # if self._n_kid_one or self._n_kid_two or self._n_kid_three or self._
-            #     # n_kid_four:
-            #     #     Node.counter += 1
-            #
-            #     print(self.name + "\t\t" + self.parent_name)
-            #     # Increase distance between levels
-            #     space += self.COUNT[0]
-            #     self.print2DUtil(self._n_kid_one, space)
-            #     self.print2DUtil(self._n_kid_two, space)
-            #     self.print2DUtil(self._n_kid_three, space)
-            #     self.print2DUtil(self._n_kid_four, space)
-            #
-            # def display(self):
-            #
-            #     # space=[0]
-            #     # Pass initial space count as 0
-            #     self.print2DUtil(self, 0)
-    # COUNT = [15]
-    #
-    # counter = 0
-    #
-    # @staticmethod
-    # def print2DUtil(self, space):
-    #
-    #     # if self:
-    #     #     arrow = "|\n" \
-    #     #         "L>>" + str(self.name)
-    #     # # Base case
-    #     if self is None:
-    #         return
-    #     # gap = ''
-    #     # for i in range (0, Node.counter):
-    #     #     gap = gap.join("\t")
-    #     # print(gap.join(self.name))
-    #     #
-    #     # if self._n_kid_one or self._n_kid_two or self._n_kid_three or self._
-    #     # n_kid_four:
-    #     #     Node.counter += 1
-    #
-    #     print(self.name + "\t\t" + self.parent_name)
-    #     # Increase distance between levels
-    #     space += self.COUNT[0]
-    #     self.print2DUtil(self._n_kid_one, space)
-    #     self.print2DUtil(self._n_kid_two, space)
-    #     self.print2DUtil(self._n_kid_three, space)
-    #     self.print2DUtil(self._n_kid_four, space)
-    #
-    # def display(self):
-    #
-    #     # space=[0]
-    #     # Pass initial space count as 0
-    #     self.print2DUtil(self, 0)
 
     @property
     def gravity_score(self):
