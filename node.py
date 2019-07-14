@@ -43,6 +43,7 @@ class Node:
         data.tmp_x = tmp_x
         data.tmp_y = tmp_y
         data.tmp_z = tmp_z
+        # self.gravity_score += 1
 
         # if self._n_kid_one is None:
         #     print("kid one is none")
@@ -87,14 +88,19 @@ class Node:
         print("nFIRSTTTTTTTTTTTTTTT")
         if self._n_kid_one is None:
             # print("new node")
-            self._n_kid_one = Node(data, self.frame_size/2, self.gravity_score, data.name,
+            self.gravity_score += 1
+            self._n_kid_one = Node(data, self.frame_size/2, 0, data.name,
                                    False, self.name, self)
+
         elif self._n_kid_one and self._n_kid_one.is_hub:
+            self.gravity_score += 1
             self._n_kid_one.insert2(data)
+
         else:
+            self.gravity_score += 1
             tmp = self._n_kid_one._data
-            self._n_kid_one = Node(tmp, self.frame_size / 2, self._gravity_score - 1, "asdf",
-                                   True, self.name, self)
+            self._n_kid_one._data = None
+            self._n_kid_one.is_hub = True
             self._n_kid_one.insert2(tmp)
             # print("test")
             self._n_kid_one.insert2(data)
@@ -102,19 +108,20 @@ class Node:
 
     def n_second(self, data):
         print("NSECONDDDDDDDDDDDD")
-
         if self._n_kid_two is None:
+            self.gravity_score += 1
             self._n_kid_two = Node(
-                data, self.frame_size / 2, self._gravity_score, data.name,
+                data, self.frame_size / 2, 0, data.name,
                 False, self.name, self)
 
-        elif self._n_kid_two and self._n_kid_two.is_hub:
+        elif self._n_kid_two and self._n_kid_two._data is None:
+            self.gravity_score += 1
             self._n_kid_two.insert2(data)
         else:
+            self.gravity_score += 1
             tmp = self._n_kid_two._data
-            self._n_kid_two = Node(
-                tmp, self.frame_size / 2, self._gravity_score, "HUB-2", True,
-                self.name, self)
+            self._n_kid_two.is_hub = False
+            self._n_kid_two._data = None
             self._n_kid_two.insert2(tmp)
             self._n_kid_two.insert2(data)
 
@@ -122,18 +129,20 @@ class Node:
         print("NTHIRDDDDDDDDDD")
 
         if self._n_kid_three is None:
+            self.gravity_score += 1
             self._n_kid_three = Node(
-                data, self.frame_size / 2, self._gravity_score, data.name,
+                data, self.frame_size / 2, 0, data.name,
                 False, self.name, self)
 
-        elif self._n_kid_three and self._n_kid_three.is_hub:
+        elif self._n_kid_three and self._n_kid_three._data is None:
+            self.gravity_score += 1
             self._n_kid_three.insert2(data)
 
         else:
+            self.gravity_score += 1
             tmp = self._n_kid_three._data
-            self._n_kid_three = Node(
-                tmp, self.frame_size / 2, self._gravity_score - 1, "HUB-3",
-                True, self.name, self)
+            self._n_kid_three._data = None
+            self._n_kid_three.is_hub = True
             self._n_kid_three.insert2(tmp)
             self._n_kid_three.insert2(data)
 
@@ -141,18 +150,20 @@ class Node:
         print("FOURTHHHHHHHHHH")
 
         if self._n_kid_four is None:
+            self.gravity_score += 1
             self._n_kid_four = Node(
-                data, self.frame_size / 2, self._gravity_score, data.name,
+                data, self.frame_size / 2, 0, data.name,
                 False, self.name, self)
 
         elif self._n_kid_four and self._n_kid_four.is_hub:
+            self.gravity_score += 1
             self._n_kid_four.insert2(data)
 
         else:
+            self.gravity_score += 1
             tmp = self._n_kid_four._data
-            self._n_kid_four = Node(
-                tmp, self.frame_size / 2, self._gravity_score, "HUB-4", True,
-                self.name, self)
+            self._n_kid_four._data = None
+            self._n_kid_four.is_hub = True
             self._n_kid_four.insert2(tmp)
             self._n_kid_four.insert2(data)
 
@@ -195,17 +206,19 @@ class Node:
     def s_third(self, data):
         print("sthirddddddddd")
         if self._s_kid_three is None:
+            self.gravity_score += 1
             self._s_kid_three = Node(
-                data, self.frame_size / 2, self.gravity_score, data.name,
+                data, self.frame_size / 2, 0, data.name,
                 False, self.name, self
             )
         elif self._s_kid_three and self._s_kid_three.is_hub:
+            self.gravity_score += 1
             self._s_kid_three.insert2(data)
         else:
+            self.gravity_score += 1
             tmp = self._s_kid_three._data
-            self._s_kid_three = Node(
-                tmp, self.frame_size / 2, self.gravity_score, "HUB-7", True,
-                self.name, self)
+            self._s_kid_three._data = None
+            self._s_kid_three.is_hub = True
             self._s_kid_three.insert2(tmp)
             self._s_kid_three.insert2(data)
 
@@ -234,6 +247,34 @@ class Node:
             return tmpx2
         else:
             return tmpx
+
+    def traverse(self):
+        if self._n_kid_one is not None:
+            print("n1", self.gravity_score)
+            self._n_kid_one.traverse()
+        elif self._n_kid_two is not None:
+            print("n2", self.gravity_score)
+            self._n_kid_two.traverse()
+        elif self._n_kid_three is not None:
+            print("n3", self.gravity_score)
+            self._n_kid_three.traverse()
+        elif self._n_kid_four is not None:
+            print("n4", self.gravity_score)
+            self._n_kid_four.traverse()
+        elif self._s_kid_one is not None:
+            print("s1", self.gravity_score)
+            self._s_kid_one.traverse()
+        elif self._s_kid_two is not None:
+            print("s2", self.gravity_score)
+            self._s_kid_two.traverse()
+        elif self._s_kid_three is not None:
+            print("s3", self.gravity_score)
+            self._s_kid_three.traverse()
+        elif self._s_kid_four is not None:
+            print("s4", self.gravity_score)
+            self._s_kid_four.traverse()
+        else:
+            print("elo", self.gravity_score)
 
     @property
     def gravity_score(self):

@@ -1,12 +1,12 @@
 from vpython import scene
 from vpython import vec
 from data import GravityObject
-from node import Node
+from node2 import Node
 import lets_calculate_this
 import random
 
 
-theta = 1
+theta = 0.5
 L = 2e7
 scene.height = scene.width = 600
 scene.range = L
@@ -21,19 +21,21 @@ def generate_points(amount):
         x = random.randrange(-1_000_000, 1_000_000) / 1_000_000
         y = random.randrange(-1_000_000, 1_000_000) / 1_000_000
         z = random.randrange(-1_000_000, 1_000_000) / 1_000_000
-        objects.append(GravityObject(x, y, z, L))
+        objects.append(GravityObject(x, y, z, L, "."))
 
 
+# empty_point = GravityObject(0, 0, 0, L, 0, "pusty")
 objects = []
 root = Node(None, 1, 0, "root", True, "none", None)
-generate_points(10000)
-# objects.append(GravityObject(0.001, 0.001, 0.001, L))
-# objects.append(GravityObject(0.200, 0.001, 0.001, L))
-# objects.append(GravityObject(0.030, 0.001, 0.001, L))
-# objects.append(GravityObject(0.1, 0.001, 0.001, L))
-# objects.append(GravityObject(0.5, 0.001, 0.001, L))
+# generate_points(10)
+objects.append(GravityObject(0.1, 0.001, 0.001, L, 10, "pierwszy"))
+objects.append(GravityObject(0.2, 0.001, 0.001, L, 10, "drugi"))
+objects.append(GravityObject(0.3, 0.001, 0.001, L, 10, "trzeci"))
+# objects.append(GravityObject(0.1, 0.001, 0.001, L, 1e20, "czwarty"))
+# objects.append(GravityObject(0.5, 0.001, -0.001, L, 1e20, "piaty"))
 
 for _object in objects:
     root.insert2(_object)
 
 # root.traverse()
+root.pre_order_traversal(root)
