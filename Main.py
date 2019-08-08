@@ -42,9 +42,9 @@ objects.append(GravityObject(0.2, 0.001, 0.001,
 
 for _object in objects:
     root.insert2(_object)
-
 # root.traverse()
 root.pre_order_traversal(root)
 root.in_order_traversal(root)
 print("\n\n\nDRUGIE\n\n\n")
 root.pre_order_traversal(root)
+# root.calc_force(objects[0], objects[1])

@@ -1,5 +1,6 @@
 import sys
 from data import GravityObject
+import math
 
 G = 6.67e-11
 
@@ -167,11 +168,34 @@ class Node:
             tmp.insert2(data)
             return tmp
 
-    def calc_force(self, root):
+    def calc_force(self, ball_one, ball_two):
 
-        pass
+        r, fi, alfa = self.calculate_distance(ball_one, ball_two)
+        F = (G*(ball_one.gravity_score * ball_two.gravity_score)) / r ** 2
+        x = F * math.cos(fi) * math.cos(alfa)
+        y = F * math.cos(alfa) * math.sin(fi)
+        z = F * math.sin(alfa)
+
+        print("\nX: ", x, "\n\t\tY: ", y, "\n\t\t\t\tZ: ", z)
+
+        # przejsc na sferyczne
+        # w google wpisac jak obliczyc sile grawitacji miedzy dwoma obiektami
 
     #jezeli ramka jest mniejsza niz N polaczyc dwie kulki
+    def calculate_distance(self, ball_one, ball_two):
+        r = math.sqrt(
+                ((ball_two._data.x - ball_one._data.x) ** 2)
+                + ((ball_two._data.y - ball_one._data.y) ** 2)
+                + ((ball_two._data.z - ball_one._data.z) ** 2)
+                )
+        fi = math.atan(
+                (ball_two._data.y - ball_one._data.y)
+                / (ball_two._data.x - ball_one._data.x)
+                )
+        alfa = math.asin(
+                (ball_two._data.z - ball_two._data.z) / r
+        )
+        return r, fi, alfa
 
     def calculate_EHHHHHHHHHHHHHH(self, root):
         x = 0.0
@@ -273,6 +297,7 @@ class Node:
             if root._data is not None:
                 print(root.name, root.is_hub, "\t\tX: ", root._data.x, "\n\t\t\tY: ",
                       root._data.y, "\n\t\t\t\tZ: ", root._data.z, "\n\t\t\t\tframe: ", root.frame_size)
+                # self.calc_force()
 
             if root._n_kid_one is not None:
                 res = res + self.pre_order_traversal(root._n_kid_one)

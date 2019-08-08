@@ -12,9 +12,9 @@ class GravityObject:
         self.tmp_x = args[3]
         self.tmp_y = args[4]
         self.tmp_z = args[5]
-        self.calc_x = self.tmp_x
-        self.calc_y = self.tmp_y
-        self.calc_z = self.tmp_z
+        self.Fx = 0.0
+        self.Fy = 0.0
+        self.Fz = 0.0
         self._L = args[6]
         self._is_in_tree = False
         self._mass = args[7]
